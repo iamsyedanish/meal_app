@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Buddy Meal',
       theme: ThemeData(
           canvasColor: const Color.fromRGBO(255, 254, 229, 1),
