@@ -1,4 +1,5 @@
 import 'package:buddy_meal_app/views/categories_screen.dart';
+import 'package:buddy_meal_app/views/category_meals_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -23,7 +24,12 @@ class MyApp extends StatelessWidget {
               bodyMedium: const TextStyle(color: Color.fromARGB(20, 51, 51, 1)),
               titleLarge: const TextStyle(
                   fontSize: 18, fontFamily: 'RobotoCondensed'))),
-      home: const CategoriesScreen(),
+      // home: const CategoriesScreen(),
+      initialRoute: '/',
+      routes: {
+        // '/': (context) => const CategoriesScreen(),
+        CategoryMealsScreen.routeName: (context) => const CategoryMealsScreen()
+      },
     );
   }
 }
