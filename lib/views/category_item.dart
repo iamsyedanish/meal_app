@@ -1,4 +1,4 @@
-import 'package:buddy_meal_app/views/category_meals_screen.dart';
+import 'package:buddy_meal_app/views/category_meal_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -9,13 +9,10 @@ class CategoryItem extends StatelessWidget {
       {super.key, required this.id, required this.title, required this.color});
 
   void selectCategory(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (_) => CategoryMealsScreen(
-                  catId: id,
-                  catTitle: title,
-                )));
+    Navigator.pushNamed(context, CategoryMealScreen.categoryMeal, arguments: {
+      'id': id,
+      'title': title,
+    });
   }
 
   @override
