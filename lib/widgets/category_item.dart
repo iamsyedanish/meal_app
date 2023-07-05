@@ -1,4 +1,4 @@
-import 'package:buddy_meal_app/views/category_meal_screen.dart';
+import 'package:buddy_meal_app/screens/category_meal_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {

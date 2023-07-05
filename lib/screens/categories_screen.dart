@@ -1,4 +1,4 @@
-import 'package:buddy_meal_app/views/category_item.dart';
+import 'package:buddy_meal_app/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 import '../constants/dummy_data.dart';
 

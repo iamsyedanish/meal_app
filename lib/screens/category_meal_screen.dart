@@ -1,4 +1,5 @@
 import 'package:buddy_meal_app/constants/dummy_data.dart';
+import 'package:buddy_meal_app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoryMealScreen extends StatelessWidget {
@@ -22,7 +23,14 @@ class CategoryMealScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Text(catMeals[index].title,);
+          return MealItem(
+            id: catMeals[index].id,
+            title: catMeals[index].title,
+            imageUrl: catMeals[index].imageUrl,
+            affordability: catMeals[index].affordability,
+            complexity: catMeals[index].complexity,
+            duration: catMeals[index].duration,
+          );
         },
         itemCount: catMeals.length,
       ),
