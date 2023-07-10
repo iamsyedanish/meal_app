@@ -1,5 +1,6 @@
 import 'package:buddy_meal_app/screens/categories_screen.dart';
 import 'package:buddy_meal_app/screens/category_meal_screen.dart';
+import 'package:buddy_meal_app/screens/filters_screen.dart';
 import 'package:buddy_meal_app/screens/meal_detail_screen.dart';
 import 'package:buddy_meal_app/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const TabsScreen(),
         CategoryMealScreen.categoryMeal: (context) =>
             const CategoryMealScreen(),
-        MealDetailScreen.mealDetail: (context) => const MealDetailScreen()
+        MealDetailScreen.mealDetail: (context) => const MealDetailScreen(),
+        FiltersScreen.routeName: (context) => const FiltersScreen(),
       },
 
       // onGenerateRoute: ,
