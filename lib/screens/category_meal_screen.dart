@@ -4,7 +4,8 @@ import 'package:buddy_meal_app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoryMealScreen extends StatefulWidget {
-  const CategoryMealScreen({super.key});
+  final List<Meal> availableMeals;
+  const CategoryMealScreen({super.key, required this.availableMeals});
   static const categoryMeal = '/category_meal_screen';
 
   @override
@@ -24,7 +25,7 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
           ModalRoute.of(context)!.settings.arguments as Map<String, String>;
       catTitle = routeArgs['title']!;
       catId = routeArgs['id']!;
-      catMeals = DUMMY_MEALS
+      catMeals = widget.availableMeals
           .where((element) => element.categories.contains(catId))
           .toList();
       _loadedInitData = true;
