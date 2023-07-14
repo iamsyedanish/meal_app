@@ -1,4 +1,3 @@
-import 'package:buddy_meal_app/constants/dummy_data.dart';
 import 'package:buddy_meal_app/models/meal.dart';
 import 'package:buddy_meal_app/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +32,11 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
     super.didChangeDependencies();
   }
 
-  void _removeMeal(String mealId) {
-    setState(() {
-      catMeals.removeWhere((meal) => meal.id == mealId);
-    });
-  }
+  // void _removeMeal(String mealId) {
+  //   setState(() {
+  //     catMeals.removeWhere((meal) => meal.id == mealId);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,6 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
             affordability: catMeals[index].affordability,
             complexity: catMeals[index].complexity,
             duration: catMeals[index].duration,
-            removeItem: _removeMeal,
           );
         },
         itemCount: catMeals.length,

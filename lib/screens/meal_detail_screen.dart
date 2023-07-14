@@ -1,13 +1,18 @@
 import 'package:buddy_meal_app/constants/dummy_data.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({super.key});
+  final Function toggleFavorite;
+  final Function isFavorite;
+  const MealDetailScreen(
+      {super.key, required this.toggleFavorite, required this.isFavorite});
 
   static const mealDetail = '/meal_detials';
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     final mealId = ModalRoute.of(context)?.settings.arguments as String;
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
 
@@ -21,7 +26,20 @@ class MealDetailScreen extends StatelessWidget {
       );
     }
 
+    void showToast() {
+      Toast.show(
+        isFavorite(mealId) ? "Added to favorites" : "Removed from favorites",
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        textStyle: const TextStyle(
+          color: Colors.white,
+        ),
+        gravity: Toast.bottom,
+        duration: Toast.lengthShort,
+      );
+    }
+
     Widget buildContainer(Widget child) {
+      ToastContext().init(context);
       return Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -36,7 +54,19 @@ class MealDetailScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(selectedMeal.title)),
+      appBar: AppBar(
+        title: Text(selectedMeal.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                toggleFavorite(mealId);
+                showToast();
+              },
+              icon: isFavorite(mealId)
+                  ? const Icon(Icons.favorite)
+                  : const Icon(Icons.favorite_border))
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -83,9 +113,9 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.delete),
-          onPressed: () => Navigator.pop(context, mealId)),
+      // floatingActionButton: FloatingActionButton(
+      //     child: const Icon(Icons.delete),
+      //     onPressed: () => Navigator.pop(context, mealId)),
     );
   }
 }

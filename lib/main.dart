@@ -1,4 +1,5 @@
 import 'package:buddy_meal_app/constants/dummy_data.dart';
+import 'package:buddy_meal_app/models/meal.dart';
 import 'package:buddy_meal_app/screens/categories_screen.dart';
 import 'package:buddy_meal_app/screens/category_meal_screen.dart';
 import 'package:buddy_meal_app/screens/filters_screen.dart';
@@ -24,6 +25,25 @@ class _MyAppState extends State<MyApp> {
   };
 
   var _availableMeals = DUMMY_MEALS;
+  final List<Meal> _favoriteMeals = [];
+
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((element) => element.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals
+            .add(DUMMY_MEALS.firstWhere((element) => element.id == mealId));
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) =>
+      _favoriteMeals.any((element) => element.id == id);
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -51,6 +71,12 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  //  void _removeMeal(String mealId, List<Meal> catMeals) {
+  //   setState(() {
+  //     catMeals.removeWhere((meal) => meal.id == mealId);
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -71,12 +97,15 @@ class _MyAppState extends State<MyApp> {
                   fontSize: 18, fontFamily: 'RobotoCondensed'))),
       initialRoute: '/',
       routes: {
-        '/': (context) => const TabsScreen(),
+        '/': (context) => TabsScreen(favoriteMeals: _favoriteMeals),
         CategoryMealScreen.categoryMeal: (context) =>
             CategoryMealScreen(availableMeals: _availableMeals),
-        MealDetailScreen.mealDetail: (context) => const MealDetailScreen(),
-        FiltersScreen.routeName: (context) =>
-            FiltersScreen(saveFilters: _setFilters, currentFilters: _filters,),
+        MealDetailScreen.mealDetail: (context) => MealDetailScreen(
+            toggleFavorite: _toggleFavorite, isFavorite: _isMealFavorite),
+        FiltersScreen.routeName: (context) => FiltersScreen(
+              saveFilters: _setFilters,
+              currentFilters: _filters,
+            ),
       },
 
       // onGenerateRoute: ,
